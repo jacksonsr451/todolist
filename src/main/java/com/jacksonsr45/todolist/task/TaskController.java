@@ -55,7 +55,8 @@ public class TaskController {
     @PutMapping("v1/tasks/{id}")
     public ResponseEntity<?> update(@RequestBody TaskRequestDTO data, HttpServletRequest request, @PathVariable UUID id) {
         try {
-            return ResponseEntity.ok(updateTaskService.execute(data, id));
+            var userId = (UUID) request.getAttribute("userId");
+            return ResponseEntity.ok(updateTaskService.execute(data, id, userId));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }

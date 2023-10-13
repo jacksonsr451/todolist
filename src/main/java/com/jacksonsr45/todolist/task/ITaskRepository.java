@@ -8,5 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface ITaskRepository extends JpaRepository<TaskModel, UUID> {
     public TaskModel findByTitle(String title);
     public List<TaskModel> findAllByUserId(UUID userId);
+    public TaskModel findByIdAndUserId(UUID id, UUID userId);
 }
 

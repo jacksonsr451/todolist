@@ -50,13 +50,26 @@ public class TaskModel {
     private LocalDateTime updatedAt;
 
     public TaskModel(TaskRequestDTO data) {
-        this.title = data.title();
-        this.description = data.description();
-        this.startAt = data.startAt();
-        this.endAt = data.endAt();
-        this.steps = data.steps();
-        this.progress = data.progress();
-        this.priority = data.priority();
+        this.setTitle(data.title());
+        this.setDescription(data.description());
+        this.setStartAt(data.startAt());
+        this.setEndAt(data.endAt());
+        this.setSteps(data.steps());
+        this.setProgress(data.progress());
+        this.setPriority(data.priority());
+    }
+
+    public void setTitle(String title) throws IllegalArgumentException {
+        if (title == null) {
+            throw new IllegalArgumentException("Title cannot be null");
+        }
+        if (title.length() > 50) {
+            throw new IllegalArgumentException("Title cannot be longer than 50 characters");
+        }
+        if (title.trim().isEmpty()) {
+            throw new IllegalArgumentException("Title cannot be empty");
+        }
+        this.title = title;
     }
 
 }
